@@ -38,5 +38,5 @@ security:
             check-token-access: permitAll()
 
 server:
-    port: 9000
+    port: 9999
     contextPath: /uaa
