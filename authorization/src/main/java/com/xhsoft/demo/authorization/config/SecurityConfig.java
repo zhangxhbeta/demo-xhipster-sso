@@ -1,6 +1,7 @@
 package com.xhsoft.demo.authorization.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,8 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .formLogin().loginPage("/login").permitAll()
                 .and()
+                .logout().logoutSuccessUrl("/login?logout").permitAll()
+                .and()
                 .requestMatchers()
-                .antMatchers("/", "/login", "/oauth/authorize", "/oauth/confirm_access")
+                .antMatchers("/", "/login", "/logout", "/oauth/authorize", "/oauth/confirm_access")
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated();
