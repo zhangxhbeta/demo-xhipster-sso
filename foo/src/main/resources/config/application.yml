@@ -11,6 +11,9 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+# auth-server
+auth-server: http://localhost:9999/uaa
+
 spring:
     jpa:
         open-in-view: false
@@ -24,11 +27,19 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
+    jackson:
+        date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
 
 security:
-    basic:
-        enabled: false
-
+    oauth2:
+        client:
+            client-id: demo
+            client-secret: demo
+            access-token-uri: ${auth-server}/oauth/token
+            user-authorization-uri: ${auth-server}/oauth/authorize
+            scope: read, write
+        resource:
+            token-info-uri: ${auth-server}/oauth/check_token
 server:
-    port: 8080
+    port: 8081
     contextPath: /foo
