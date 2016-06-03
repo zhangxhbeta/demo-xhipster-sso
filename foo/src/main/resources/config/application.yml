@@ -29,8 +29,9 @@ spring:
         mode: XHTML
     jackson:
         date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
-
 security:
+    basic:
+        enabled: false
     oauth2:
         client:
             client-id: demo
@@ -39,7 +40,8 @@ security:
             user-authorization-uri: ${auth-server}/oauth/authorize
             scope: read, write
         resource:
-            token-info-uri: ${auth-server}/oauth/check_token
+            jwt:
+                key-uri: ${auth-server}/oauth/token_key
 server:
     port: 8081
     contextPath: /foo

@@ -18,7 +18,6 @@ import java.net.UnknownHostException;
 
 
 @SpringBootApplication
-@EnableAuthorizationServer
 public class AuthorizationWebApplication {
 
     private static final Logger log = LoggerFactory.getLogger(AuthorizationWebApplication.class);
@@ -33,6 +32,7 @@ public class AuthorizationWebApplication {
         SpringApplication app = new SpringApplication(AuthorizationWebApplication.class);
         SimpleCommandLinePropertySource source = new SimpleCommandLinePropertySource(args);
         addDefaultProfile(app, source);
+
         Environment env = app.run(args).getEnvironment();
         log.info("Access URLs:\n----------------------------------------------------------\n\t" +
                         "Local: \t\thttp://localhost:{}{}\n\t" +
