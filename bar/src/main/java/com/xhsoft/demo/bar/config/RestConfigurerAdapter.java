@@ -15,11 +15,12 @@ public class RestConfigurerAdapter extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
+
+                .requestMatchers()
+                .antMatchers("/api/**")
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-//                .requestMatchers()
-//                .antMatchers("/api/**")
-//                .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/**").access("#oauth2.hasScope('read')")
                 .antMatchers(HttpMethod.POST, "/api/**").access("#oauth2.hasScope('write')");
