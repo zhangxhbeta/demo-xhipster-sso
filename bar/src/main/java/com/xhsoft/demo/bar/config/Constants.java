@@ -1,4 +1,4 @@
-package com.xhsoft.demo.authorization.config;
+package com.xhsoft.demo.bar.config;
 
 /**
  * Application constants.

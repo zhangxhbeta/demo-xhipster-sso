@@ -1,0 +1,47 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overriden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+# auth-server
+auth-server: http://localhost:9999/uaa
+
+spring:
+    jpa:
+        open-in-view: false
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+    messages:
+        basename: classpath:/i18n/messages
+    mvc:
+        favicon:
+            enabled: false
+    thymeleaf:
+        mode: XHTML
+    jackson:
+        date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+security:
+    basic:
+        enabled: false
+    oauth2:
+        client:
+            client-id: demo
+            client-secret: demo
+            access-token-uri: ${auth-server}/oauth/token
+            user-authorization-uri: ${auth-server}/oauth/authorize
+            scope: read, write
+        resource:
+            jwt:
+                key-uri: ${auth-server}/oauth/token_key
+server:
+    port: 8082
+    contextPath: /bar
